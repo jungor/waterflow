@@ -30,13 +30,12 @@ class ImgBox extends React.Component {
     // console.log(this.props.src+' render!');
     return (
       <img
-        className={['img-box'].join(' ')}
-        src={this.props.src}
+        className={['img-box', 'waiting'].join(' ')}
+        src={this.props.src + '?' + Date.now()}
         title={this.props.title}
         alt={this.props.title}
         style={this.props.style}
         onLoad={this.props.resolvePms}
-        // onLoad={()=>console.log(this.props.src + ' load!')}
       />
     );
   }
@@ -49,7 +48,7 @@ class LoadMoreBtn extends React.Component {
         className={'load-more-btn'}
         onClick={this.props.loadMoreImgs}
       >
-        点击加载更多
+        正在加载...
       </div>
     );
   }
@@ -76,6 +75,10 @@ class AppComponent extends React.Component {
      */
     return (event) => {
       if (!this.isLoading) {
+        if (event) {
+          event.target.textContent = '正在加载...';
+          document.body.classList.add('waiting');
+        }
         let newState = update(this.state, {
           imgBoxPropsArr: {
             $push: imgBoxPropsArr
@@ -138,8 +141,16 @@ class AppComponent extends React.Component {
     console.log(`Current size: ${this.size}, waiting ${pmsArr.length} promises...`);
     Promise.all(pmsArr).then((imgboxDOMArr) => {
       this.waterflow(imgboxDOMArr);
+      imgboxDOMArr.forEach((item, index) => {
+        item.classList.remove('waiting');
+      });
       this.size += imgboxDOMArr.length;
       this.isLoading = false;
+      let btn = document.getElementsByClassName('load-more-btn')[0];
+      btn.textContent = '点击加载更多';
+      document.body.classList.remove('waiting');
+
+      // alert('OK!');
     })
     return (
       <div className='img-box-container' ref='img-box-container'>
@@ -157,12 +168,5 @@ class AppComponent extends React.Component {
 AppComponent.defaultProps = {
 };
 
-window.onscroll = function windowScrollHandler(e) {
-  // console.log(e);
-}
-
-window.onload = function windowLoadHandler() {
-  console.log('window load!');
-}
 
 export default AppComponent;
