@@ -16,7 +16,8 @@ html, body {
 
 .img-box-container {
   position: relative;
-  width: 1080px;
+  width: 90%;
+  min-width: 380px;
   margin: 80px auto 0;
   @at-root {
     .img-box {
