@@ -27,6 +27,7 @@ You need to install below dependencies globally(that means system wide)
 你需要全局安装以下依赖
 
 `nodejs > 4.x`
+
 `webpack`
 
 
