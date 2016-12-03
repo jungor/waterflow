@@ -1,9 +1,6 @@
-# gallery
+# waterflow
 
-A gallery implemented with react.
-
-用 react 和 webpack 实现的画廊小应用
-
+用 react 和 webpack 实现的瀑布流布局
 ## structure
 
 ```
@@ -22,8 +19,6 @@ waterflow
 
 ## requirement
 
-You need to install below dependencies globally(that means system wide)
-
 你需要全局安装以下依赖
 
 `nodejs > 4.x`
@@ -32,8 +27,6 @@ You need to install below dependencies globally(that means system wide)
 
 
 ## How to run
-
-In terminal environment, entry the command below to run the app
 
 在终端环境中输入以下命令来启动
 
